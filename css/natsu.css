@@ -384,6 +384,10 @@ a {
   display: none;
 }
 
+.mobile-home {
+  display: none;
+}
+
 .mobile-player {
   display: none;
 }
@@ -640,6 +644,23 @@ a {
     border-radius: 999px;
     background: rgba(13, 8, 10, 0.78);
     backdrop-filter: blur(14px);
+  }
+
+  .mobile-home {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+    z-index: 32;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    aspect-ratio: 1;
+    color: #160704;
+    text-decoration: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--fire));
+    box-shadow: 0 0 24px rgba(255, 106, 31, 0.3);
+    font-weight: 1000;
   }
 
   .joystick,
