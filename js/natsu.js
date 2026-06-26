@@ -6,8 +6,23 @@ const directionLabel = document.getElementById("directionLabel");
 const energyLabel = document.getElementById("energyLabel");
 const actionButtons = document.querySelectorAll("[data-action]");
 const touchButtons = document.querySelectorAll("[data-hold]");
+const audio = document.getElementById("musicAudio");
+const trackName = document.getElementById("trackName");
+const playButtons = document.querySelectorAll("#playPause, #mobilePlayPause");
+const trackButtons = document.querySelectorAll("[data-track]");
+const volumeControl = document.getElementById("volumeControl");
 
 const spriteBase = "assets/natsu_sprites/";
+const tracks = {
+  natsu: {
+    title: "Natsu Theme",
+    src: "assets/audio/natsu-theme.mp3"
+  },
+  battle: {
+    title: "Gekitou Mahoujin",
+    src: "assets/audio/gekitou-mahoujin.mp3"
+  }
+};
 
 const frames = {
   idleDown: ["idle_front_01", "idle_front_02"],
@@ -151,6 +166,36 @@ function handleAction(action) {
   }
 }
 
+function syncPlayLabels() {
+  const label = audio.paused ? "Play" : "Pausa";
+  playButtons.forEach((button) => {
+    button.textContent = label;
+  });
+}
+
+function setTrack(trackId) {
+  const track = tracks[trackId];
+  if (!track) return;
+  const wasPlaying = !audio.paused;
+  audio.src = track.src;
+  trackName.textContent = track.title;
+  trackButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.track === trackId);
+  });
+  if (wasPlaying) {
+    audio.play().catch(() => syncPlayLabels());
+  }
+}
+
+function toggleMusic() {
+  if (audio.paused) {
+    audio.play().then(syncPlayLabels).catch(syncPlayLabels);
+  } else {
+    audio.pause();
+    syncPlayLabels();
+  }
+}
+
 function onKeyDown(event) {
   if (keyMap[event.key]) {
     state.keys.add(keyMap[event.key]);
@@ -223,6 +268,24 @@ function loop(now) {
 actionButtons.forEach((button) => {
   button.addEventListener("click", () => handleAction(button.dataset.action));
 });
+
+playButtons.forEach((button) => {
+  button.addEventListener("click", toggleMusic);
+});
+
+trackButtons.forEach((button) => {
+  button.addEventListener("click", () => setTrack(button.dataset.track));
+});
+
+if (volumeControl) {
+  audio.volume = Number(volumeControl.value);
+  volumeControl.addEventListener("input", () => {
+    audio.volume = Number(volumeControl.value);
+  });
+}
+
+audio.addEventListener("play", syncPlayLabels);
+audio.addEventListener("pause", syncPlayLabels);
 
 touchButtons.forEach((button) => {
   if (button.classList.contains("center")) return;

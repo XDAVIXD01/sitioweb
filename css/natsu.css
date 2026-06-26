@@ -286,9 +286,65 @@ a {
   color: #fff6ed;
 }
 
+.music-player {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.music-player strong {
+  font-size: 1.25rem;
+}
+
+.track-buttons,
+.player-controls,
+.mobile-player {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.track-btn,
+.play-btn {
+  min-height: 42px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  font-weight: 900;
+  padding: 0 14px;
+}
+
+.track-btn.active,
+.play-btn {
+  color: #160704;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--gold), var(--fire));
+}
+
+.player-controls label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.player-controls input {
+  accent-color: var(--fire);
+  width: 150px;
+}
+
 .mobile-actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -318,6 +374,10 @@ a {
 }
 
 .mobile-controls {
+  display: none;
+}
+
+.mobile-player {
   display: none;
 }
 
@@ -398,8 +458,8 @@ a {
 }
 
 .mobile-action {
-  min-width: 76px;
-  min-height: 58px;
+  min-width: 82px;
+  min-height: 66px;
   border-radius: 50%;
   padding: 0 12px;
 }
@@ -431,7 +491,7 @@ a {
   }
 
   body {
-    padding-bottom: 210px;
+    padding-bottom: 228px;
   }
 
   .mobile-controls {
@@ -444,9 +504,24 @@ a {
     align-items: end;
     justify-content: space-between;
     gap: 18px;
-    padding: 16px max(14px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+    padding: 58px max(14px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
     background: linear-gradient(to top, rgba(8, 4, 5, 0.96), rgba(8, 4, 5, 0.68), transparent);
     pointer-events: none;
+  }
+
+  .mobile-player {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    bottom: 166px;
+    z-index: 31;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    border: 1px solid rgba(255, 119, 56, 0.18);
+    border-radius: 8px;
+    background: rgba(13, 8, 10, 0.78);
+    backdrop-filter: blur(14px);
   }
 
   .joystick,
@@ -455,8 +530,8 @@ a {
   }
 
   .mobile-actions {
-    grid-template-columns: repeat(2, minmax(68px, 1fr));
-    max-width: 190px;
+    grid-template-columns: 1fr;
+    max-width: 96px;
   }
 }
 
