@@ -9,6 +9,8 @@ const touchButtons = document.querySelectorAll("[data-hold]");
 const audio = document.getElementById("musicAudio");
 const trackName = document.getElementById("trackName");
 const playButtons = document.querySelectorAll("#playPause, #mobilePlayPause");
+const mobilePrevTrack = document.getElementById("mobilePrevTrack");
+const mobileNextTrack = document.getElementById("mobileNextTrack");
 const trackButtons = document.querySelectorAll("[data-track]");
 const volumeControl = document.getElementById("volumeControl");
 const audioStatus = document.getElementById("audioStatus");
@@ -24,6 +26,8 @@ const tracks = {
     src: "assets/audio/gekitou-mahoujin.mp3"
   }
 };
+const trackOrder = ["natsu", "battle"];
+let currentTrack = "natsu";
 
 const frames = {
   idleDown: ["idle_front_01", "idle_front_02"],
@@ -170,7 +174,12 @@ function handleAction(action) {
 function syncPlayLabels() {
   const label = audio.paused ? "Play" : "Pausa";
   playButtons.forEach((button) => {
-    button.textContent = label;
+    if (button.classList.contains("icon-player")) {
+      button.classList.toggle("is-playing", !audio.paused);
+      button.setAttribute("aria-label", audio.paused ? "Reproducir" : "Pausar");
+    } else {
+      button.textContent = label;
+    }
   });
   if (audioStatus && !audio.paused) {
     audioStatus.textContent = "Reproduciendo automaticamente.";
@@ -181,6 +190,7 @@ function setTrack(trackId) {
   const track = tracks[trackId];
   if (!track) return;
   const wasPlaying = !audio.paused;
+  currentTrack = trackId;
   audio.src = track.src;
   trackName.textContent = track.title;
   trackButtons.forEach((button) => {
@@ -189,6 +199,13 @@ function setTrack(trackId) {
   if (wasPlaying) {
     startMusic().catch(() => syncPlayLabels());
   }
+}
+
+function changeTrack(step) {
+  const currentIndex = trackOrder.indexOf(currentTrack);
+  const nextIndex = (currentIndex + step + trackOrder.length) % trackOrder.length;
+  setTrack(trackOrder[nextIndex]);
+  startMusic().catch(syncPlayLabels);
 }
 
 function startMusic() {
@@ -229,6 +246,22 @@ function tryAutoplay() {
     window.addEventListener("keydown", unlock, { once: true });
     window.addEventListener("touchstart", unlock, { once: true });
   });
+}
+
+function requestLandscapeMode() {
+  if (!matchMedia("(max-width: 980px)").matches) return;
+  const root = document.documentElement;
+  const goFullscreen = root.requestFullscreen ? root.requestFullscreen.bind(root) : null;
+  const lock = () => {
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock("landscape").catch(() => {});
+    }
+  };
+  if (goFullscreen && !document.fullscreenElement) {
+    goFullscreen().then(lock).catch(lock);
+  } else {
+    lock();
+  }
 }
 
 function onKeyDown(event) {
@@ -315,6 +348,14 @@ trackButtons.forEach((button) => {
   });
 });
 
+if (mobilePrevTrack) {
+  mobilePrevTrack.addEventListener("click", () => changeTrack(-1));
+}
+
+if (mobileNextTrack) {
+  mobileNextTrack.addEventListener("click", () => changeTrack(1));
+}
+
 if (volumeControl) {
   audio.volume = Number(volumeControl.value);
   volumeControl.addEventListener("input", () => {
@@ -342,6 +383,7 @@ touchButtons.forEach((button) => {
 
 window.addEventListener("keydown", onKeyDown);
 window.addEventListener("keyup", onKeyUp);
+window.addEventListener("pointerdown", requestLandscapeMode, { once: true });
 stage.addEventListener("pointerdown", () => stage.focus());
 
 if (window.gsap) {

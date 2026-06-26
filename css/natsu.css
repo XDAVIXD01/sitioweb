@@ -388,6 +388,74 @@ a {
   display: none;
 }
 
+.icon-player {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.icon-player::before,
+.icon-player::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+}
+
+.play-toggle::before {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid var(--ink);
+  margin-left: 2px;
+}
+
+.play-toggle.is-playing::before {
+  width: 5px;
+  height: 18px;
+  border: 0;
+  background: var(--ink);
+  box-shadow: 9px 0 0 var(--ink);
+  margin-left: -5px;
+}
+
+.prev-track::before,
+.next-track::before {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+}
+
+.prev-track::before {
+  border-right: 13px solid var(--ink);
+  margin-left: 3px;
+}
+
+.prev-track::after {
+  width: 3px;
+  height: 18px;
+  background: var(--ink);
+  margin-left: -10px;
+}
+
+.next-track::before {
+  border-left: 13px solid var(--ink);
+  margin-left: -3px;
+}
+
+.next-track::after {
+  width: 3px;
+  height: 18px;
+  background: var(--ink);
+  margin-left: 10px;
+}
+
 .joystick {
   display: grid;
   grid-template-columns: repeat(3, 54px);
@@ -489,16 +557,58 @@ a {
 }
 
 @media (max-width: 980px) {
-  .trainer-layout {
-    grid-template-columns: 1fr;
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
-  .trainer-console {
+  .training-bg,
+  .trainer-topbar,
+  .trainer-console,
+  .stage-hud {
     display: none;
   }
 
+  .trainer-layout {
+    position: fixed;
+    inset: 0;
+    display: block;
+    width: 100vw;
+    height: 100svh;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stage-panel {
+    position: fixed;
+    inset: 0;
+    border: 0;
+    border-radius: 0;
+    background: #09070a;
+  }
+
   body {
-    padding-bottom: 228px;
+    padding-bottom: 0;
+  }
+
+  .training-stage {
+    width: 100vw;
+    min-height: 100svh;
+    height: 100svh;
+    background:
+      radial-gradient(circle at 68% 30%, rgba(255, 106, 31, 0.24), transparent 15%),
+      radial-gradient(circle at 22% 65%, rgba(70, 232, 255, 0.2), transparent 20%),
+      linear-gradient(180deg, rgba(10, 12, 17, 0.84), rgba(22, 9, 8, 0.95));
+  }
+
+  .arena-lines {
+    inset: 18% 10% 2%;
+  }
+
+  .target {
+    width: 66px;
   }
 
   .mobile-controls {
@@ -511,22 +621,23 @@ a {
     align-items: end;
     justify-content: space-between;
     gap: 18px;
-    padding: 58px max(14px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
-    background: linear-gradient(to top, rgba(8, 4, 5, 0.96), rgba(8, 4, 5, 0.68), transparent);
+    padding: 18px max(18px, env(safe-area-inset-left)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    background: linear-gradient(to top, rgba(8, 4, 5, 0.72), transparent);
     pointer-events: none;
   }
 
   .mobile-player {
     position: fixed;
-    left: 14px;
-    right: 14px;
-    bottom: 166px;
+    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+    top: max(12px, env(safe-area-inset-top));
+    bottom: auto;
     z-index: 31;
     display: flex;
-    justify-content: center;
-    padding: 8px;
+    justify-content: end;
+    padding: 6px;
     border: 1px solid rgba(255, 119, 56, 0.18);
-    border-radius: 8px;
+    border-radius: 999px;
     background: rgba(13, 8, 10, 0.78);
     backdrop-filter: blur(14px);
   }
@@ -540,16 +651,23 @@ a {
     grid-template-columns: 1fr;
     max-width: 96px;
   }
+
+  .natsu-sprite {
+    transform: translate(-50%, -100%) scale(2.6);
+  }
+
+  .natsu-shadow {
+    transform: translate(-50%, -50%) scale(1.45);
+  }
 }
 
 @media (max-width: 640px) {
-  .trainer-topbar,
   .stage-hud {
     grid-template-columns: 1fr;
   }
 
   .trainer-topbar {
-    display: grid;
+    display: none;
     padding: 12px 0;
   }
 
@@ -562,7 +680,7 @@ a {
   }
 
   .training-stage {
-    min-height: calc(100svh - 292px);
+    min-height: 100svh;
   }
 
   .natsu-sprite {
@@ -571,5 +689,27 @@ a {
 
   .natsu-shadow {
     transform: translate(-50%, -50%) scale(1.35);
+  }
+}
+
+@media (max-width: 980px) and (orientation: landscape) {
+  .joystick {
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 48px);
+    gap: 6px;
+  }
+
+  .joy {
+    width: 48px;
+    min-height: 48px;
+  }
+
+  .mobile-action {
+    min-width: 76px;
+    min-height: 56px;
+  }
+
+  .natsu-sprite {
+    transform: translate(-50%, -100%) scale(2.35);
   }
 }
