@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghost X Arena | Zona Gamer</title>
+  <title>Hitori Bocchi | Portal de personajes</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -11,124 +11,45 @@
   <div class="noise" aria-hidden="true"></div>
 
   <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Ghost X Arena inicio">
-      <span class="brand-mark">GX</span>
-      <span>Ghost X Arena</span>
+    <a class="brand" href="index.html" aria-label="Inicio">
+      <span class="brand-mark">HB</span>
+      <span>Hitori Bocchi</span>
     </a>
-    <nav class="nav" aria-label="Navegacion principal">
+    <nav class="nav" aria-label="Personajes">
       <a class="natsu-link" href="natsu.html">Natsu</a>
       <a class="zeref-link" href="zeref.html">Zeref</a>
-      <a href="#misiones">Misiones</a>
-      <a href="#trampas">Trampas</a>
-      <a href="#control">Control</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="inicio">
       <div class="hero-copy">
-        <p class="eyebrow">Sistema tactico online</p>
-        <h1>Entra a la arena neon</h1>
+        <p class="eyebrow">Portal de entrenamiento</p>
+        <h1>Hitori Bocchi</h1>
         <p class="lead">
-          Radar 3D, trampas inteligentes, bombas de pulso y una consola viva para dominar el mapa
-          como si estuvieras dentro de una cabina de combate futurista.
+          Un acceso simple para elegir personaje, entrar al campo de practica y probar movimiento,
+          ataques y musica desde PC o celular.
         </p>
         <div class="hero-actions">
           <a class="btn natsu-cta" href="natsu.html">Natsu</a>
           <a class="btn zeref-cta" href="zeref.html">Zeref</a>
-          <button class="btn primary" id="deployBtn" type="button">Iniciar despliegue</button>
-          <button class="btn ghost" id="overloadBtn" type="button">Sobrecargar nucleo</button>
         </div>
       </div>
 
-      <aside class="hud" aria-label="Panel de estado">
-        <div class="radar">
-          <div class="radar-sweep"></div>
-          <span class="ping ping-a"></span>
-          <span class="ping ping-b"></span>
-          <span class="ping ping-c"></span>
-          <div class="radar-core">LIVE</div>
-        </div>
-        <div class="status-grid">
-          <div class="metric">
-            <span>Energia</span>
-            <strong id="energyValue">94%</strong>
-            <div class="meter"><i id="energyBar"></i></div>
-          </div>
-          <div class="metric">
-            <span>Amenaza</span>
-            <strong id="threatValue">Alta</strong>
-            <div class="meter danger"><i id="threatBar"></i></div>
-          </div>
-          <div class="metric">
-            <span>Trampas</span>
-            <strong id="trapValue">06</strong>
-            <div class="meter warn"><i id="trapBar"></i></div>
-          </div>
-        </div>
+      <aside class="character-panel" aria-label="Seleccion de personajes">
+        <a class="character-card natsu-card" href="natsu.html">
+          <span class="character-tag">Fuego</span>
+          <h2>Natsu Dragneel</h2>
+          <p>Campo de entrenamiento con golpe, llama, joystick movil y musica.</p>
+        </a>
+        <a class="character-card zeref-card" href="zeref.html">
+          <span class="character-tag">Magia oscura</span>
+          <h2>Zeref Dragneel</h2>
+          <p>Practica movimiento, ataque frontal y magia oscura con controles adaptados.</p>
+        </a>
       </aside>
     </section>
-
-    <section class="section-band" id="misiones">
-      <div class="section-head">
-        <p class="eyebrow">Mapa activo</p>
-        <h2>Misiones de ataque</h2>
-      </div>
-
-      <div class="mission-grid">
-        <article class="mission-card" data-action="Bomba de pulso magnetico armada en el corredor norte." data-type="bomb">
-          <span class="mission-code">B-01</span>
-          <h3>Bomba de pulso</h3>
-          <p>Activa una onda de luz y desestabiliza torres enemigas cercanas.</p>
-          <button type="button">Detonar</button>
-        </article>
-        <article class="mission-card" data-action="Radar de barrido profundo rastreando objetivos invisibles." data-type="scan">
-          <span class="mission-code">R-07</span>
-          <h3>Radar profundo</h3>
-          <p>Escanea el terreno y marca amenazas dentro de la niebla tactica.</p>
-          <button type="button">Escanear</button>
-        </article>
-        <article class="mission-card" data-action="Trampa de plasma colocada bajo la plataforma central." data-type="trap">
-          <span class="mission-code">T-12</span>
-          <h3>Trampa plasma</h3>
-          <p>Bloquea rutas rapidas con una red reactiva de alto voltaje.</p>
-          <button type="button">Colocar</button>
-        </article>
-        <article class="mission-card" data-action="Dron senuelo desplegado para atraer fuego enemigo." data-type="drone">
-          <span class="mission-code">D-04</span>
-          <h3>Dron senuelo</h3>
-          <p>Genera distraccion y abre una ventana para contraatacar.</p>
-          <button type="button">Lanzar</button>
-        </article>
-      </div>
-    </section>
-
-    <section class="war-room" id="trampas">
-      <div class="trap-stack">
-        <p class="eyebrow">Inventario</p>
-        <h2>Trampas listas</h2>
-        <button class="trap-btn" type="button" data-trap="Muro laser desplegado. Ruta cerrada.">Muro laser</button>
-        <button class="trap-btn" type="button" data-trap="Mina de choque escondida. Sensor en espera.">Mina de choque</button>
-        <button class="trap-btn" type="button" data-trap="Jaula electrica activa. Enemigos ralentizados.">Jaula electrica</button>
-        <button class="trap-btn" type="button" data-trap="Cebo holografico encendido. Senal duplicada.">Cebo holografico</button>
-      </div>
-
-      <div class="console" id="control">
-        <div class="console-top">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div id="log">
-          <p>&gt; Ghost X Arena cargada.</p>
-          <p>&gt; Three.js local conectado.</p>
-          <p>&gt; Esperando orden del jugador.</p>
-        </div>
-      </div>
-    </section>
   </main>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="vendor/gsap.min.js"></script>
   <script type="module" src="js/app.js"></script>
