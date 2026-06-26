@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeref | Campo de entrenamiento</title>
+  <link rel="stylesheet" href="css/natsu.css">
+</head>
+<body class="zeref-theme">
+  <div class="training-bg" aria-hidden="true"></div>
+
+  <header class="trainer-topbar">
+    <a class="back-link" href="index.html">Ghost X Arena</a>
+    <div class="trainer-title">
+      <span>Zeref</span>
+      <strong>Campo de entrenamiento</strong>
+    </div>
+  </header>
+
+  <main class="trainer-layout">
+    <section class="stage-panel">
+      <div class="stage-hud">
+        <div>
+          <span>Estado</span>
+          <strong id="stateLabel">Reposo</strong>
+        </div>
+        <div>
+          <span>Direccion</span>
+          <strong id="directionLabel">Frente</strong>
+        </div>
+        <div>
+          <span>Energia</span>
+          <strong id="energyLabel">100%</strong>
+        </div>
+      </div>
+
+      <div class="training-stage" id="stage" tabindex="0" aria-label="Campo de entrenamiento de Zeref">
+        <div class="arena-lines" aria-hidden="true"></div>
+        <div class="flame-orb orb-a" aria-hidden="true"></div>
+        <div class="flame-orb orb-b" aria-hidden="true"></div>
+        <div class="target target-a" aria-hidden="true"></div>
+        <div class="target target-b" aria-hidden="true"></div>
+        <div class="natsu-shadow" id="shadow" aria-hidden="true"></div>
+        <div class="natsu-sprite" id="natsu" aria-label="Zeref"></div>
+      </div>
+    </section>
+
+    <aside class="trainer-console">
+      <p class="eyebrow">Modulo</p>
+      <h1>Zeref Dragneel</h1>
+
+      <div class="desktop-help" aria-label="Controles de teclado para PC">
+        <p class="summary">Controles para teclado en PC.</p>
+        <div class="key-chips">
+          <span>WASD / Flechas</span>
+          <span>J Atacar</span>
+          <span>F Oscura</span>
+        </div>
+      </div>
+
+      <div class="music-player" aria-label="Reproductor de musica">
+        <p class="eyebrow">Musica</p>
+        <strong id="trackName">Natsu Theme</strong>
+        <div class="track-buttons">
+          <button class="track-btn active" type="button" data-track="natsu">Natsu</button>
+          <button class="track-btn" type="button" data-track="battle">Batalla</button>
+        </div>
+        <div class="player-controls">
+          <button class="play-btn" id="playPause" type="button">Play</button>
+          <label>
+            Volumen
+            <input id="volumeControl" type="range" min="0" max="1" step="0.05" value="0.65">
+          </label>
+        </div>
+        <small class="audio-status" id="audioStatus">Preparando audio...</small>
+        <audio id="musicAudio" preload="auto" autoplay loop playsinline src="assets/audio/natsu-theme.mp3"></audio>
+      </div>
+    </aside>
+  </main>
+
+  <a class="mobile-home" href="index.html" aria-label="Volver al inicio">GX</a>
+
+  <section class="mobile-controls" aria-label="Controles para movil">
+    <div class="joystick" aria-label="Joystick de movimiento">
+      <button class="joy up" type="button" data-hold="ArrowUp">Arriba</button>
+      <button class="joy left" type="button" data-hold="ArrowLeft">Izquierda</button>
+      <button class="joy center" type="button" aria-hidden="true" tabindex="-1"></button>
+      <button class="joy right" type="button" data-hold="ArrowRight">Derecha</button>
+      <button class="joy down" type="button" data-hold="ArrowDown">Abajo</button>
+    </div>
+    <div class="mobile-actions">
+      <button class="mobile-action fire" type="button" data-action="magic">Oscura</button>
+      <button class="mobile-action" type="button" data-action="attack">Golpe</button>
+    </div>
+  </section>
+
+  <section class="mobile-player" aria-label="Reproductor movil">
+    <button class="icon-player prev-track" id="mobilePrevTrack" type="button" aria-label="Cancion anterior"></button>
+    <button class="icon-player play-toggle" id="mobilePlayPause" type="button" aria-label="Reproducir o pausar"></button>
+    <button class="icon-player next-track" id="mobileNextTrack" type="button" aria-label="Siguiente cancion"></button>
+  </section>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="js/zeref.js"></script>
+</body>
+</html>

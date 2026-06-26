@@ -134,6 +134,14 @@ a {
   box-shadow: 0 0 30px rgba(255, 106, 31, 0.26);
 }
 
+.nav .zeref-link,
+.zeref-cta {
+  color: #120618;
+  border-color: transparent;
+  background: linear-gradient(135deg, #e1a8ff, #8f35ff);
+  box-shadow: 0 0 30px rgba(143, 53, 255, 0.28);
+}
+
 main {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;

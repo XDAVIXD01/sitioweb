@@ -9,6 +9,15 @@
   --cyan: #46e8ff;
 }
 
+body.zeref-theme {
+  --panel: rgba(12, 8, 18, 0.84);
+  --line: rgba(181, 106, 255, 0.34);
+  --fire: #7c35ff;
+  --gold: #d9a0ff;
+  --pink: #a85cff;
+  --cyan: #b674ff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -35,6 +44,19 @@ a {
     radial-gradient(circle at 20% 12%, rgba(255, 106, 31, 0.24), transparent 30%),
     radial-gradient(circle at 82% 20%, rgba(255, 111, 156, 0.16), transparent 32%),
     linear-gradient(145deg, #070609 0%, #171018 48%, #120806 100%);
+}
+
+body.zeref-theme .training-bg {
+  background:
+    radial-gradient(circle at 20% 12%, rgba(140, 64, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(188, 108, 255, 0.18), transparent 32%),
+    linear-gradient(145deg, #050407 0%, #130d1d 48%, #08050c 100%);
+}
+
+body.zeref-theme .training-stage {
+  background:
+    radial-gradient(ellipse at center, rgba(140, 64, 255, 0.12), transparent 48%),
+    linear-gradient(180deg, rgba(8, 8, 14, 0.82), rgba(13, 8, 20, 0.94));
 }
 
 .training-bg::after {
