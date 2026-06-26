@@ -251,6 +251,7 @@ a {
 
 .trainer-console {
   padding: 18px;
+  align-self: start;
 }
 
 .trainer-console h1 {
@@ -266,41 +267,33 @@ a {
   line-height: 1.65;
 }
 
-.key-grid {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  gap: 8px;
+.desktop-help {
   margin: 18px 0;
 }
 
-.key-grid span,
-.key-grid strong {
-  min-height: 38px;
-  padding: 9px 10px;
+.key-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.key-chips span {
+  min-height: 36px;
+  padding: 9px 11px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
-}
-
-.key-grid span {
-  color: #180806;
-  background: linear-gradient(135deg, var(--gold), var(--fire));
   font-weight: 900;
-  text-align: center;
+  color: #fff6ed;
 }
 
-.key-grid strong {
-  font-weight: 800;
-}
-
-.action-row,
-.touch-pad {
+.mobile-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
-.action-btn,
-.touch-pad button {
+.mobile-action,
+.joy {
   min-height: 48px;
   color: var(--ink);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -311,21 +304,110 @@ a {
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.action-btn:hover,
-.touch-pad button:hover {
+.mobile-action:hover,
+.joy:hover {
   transform: translateY(-2px);
   border-color: var(--gold);
   box-shadow: 0 0 24px rgba(255, 106, 31, 0.26);
 }
 
-.action-btn.fire {
+.mobile-action.fire {
   color: #160704;
   border-color: transparent;
   background: linear-gradient(135deg, var(--gold), var(--fire));
 }
 
-.touch-pad {
-  margin-top: 16px;
+.mobile-controls {
+  display: none;
+}
+
+.joystick {
+  display: grid;
+  grid-template-columns: repeat(3, 54px);
+  grid-template-rows: repeat(3, 54px);
+  gap: 7px;
+}
+
+.joy {
+  width: 54px;
+  min-height: 54px;
+  padding: 0;
+  border-radius: 50%;
+  color: transparent;
+  font-size: 0;
+  position: relative;
+}
+
+.joy::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid var(--ink);
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+}
+
+.joy.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.joy.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.joy.left::before {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.joy.center {
+  grid-column: 2;
+  grid-row: 2;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.joy.center::before {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.joy.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.joy.right::before {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.joy.down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.joy.down::before {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.mobile-action {
+  min-width: 76px;
+  min-height: 58px;
+  border-radius: 50%;
+  padding: 0 12px;
+}
+
+.mobile-action.small {
+  min-height: 44px;
+  font-size: 0.82rem;
+  opacity: 0.9;
 }
 
 @keyframes breathe {
@@ -342,6 +424,39 @@ a {
 @media (max-width: 980px) {
   .trainer-layout {
     grid-template-columns: 1fr;
+  }
+
+  .trainer-console {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 210px;
+  }
+
+  .mobile-controls {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px max(14px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+    background: linear-gradient(to top, rgba(8, 4, 5, 0.96), rgba(8, 4, 5, 0.68), transparent);
+    pointer-events: none;
+  }
+
+  .joystick,
+  .mobile-actions {
+    pointer-events: auto;
+  }
+
+  .mobile-actions {
+    grid-template-columns: repeat(2, minmax(68px, 1fr));
+    max-width: 190px;
   }
 }
 
@@ -360,15 +475,12 @@ a {
     justify-items: start;
   }
 
-  .stage-hud,
-  .key-grid,
-  .action-row,
-  .touch-pad {
+  .stage-hud {
     grid-template-columns: 1fr;
   }
 
   .training-stage {
-    min-height: 540px;
+    min-height: calc(100svh - 292px);
   }
 
   .natsu-sprite {

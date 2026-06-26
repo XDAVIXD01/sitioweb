@@ -46,38 +46,39 @@
     </section>
 
     <aside class="trainer-console">
-      <p class="eyebrow">Controles</p>
+      <p class="eyebrow">Modulo</p>
       <h1>Natsu Dragneel</h1>
-      <p class="summary">
-        Usa el teclado para moverlo por el campo, atacar y lanzar fuego. En celular tambien puedes usar
-        los botones tactiles.
-      </p>
 
-      <div class="key-grid">
-        <span>W / Arriba</span><strong>Caminar atras</strong>
-        <span>S / Abajo</span><strong>Caminar al frente</strong>
-        <span>A / Izquierda</span><strong>Caminar izquierda</strong>
-        <span>D / Derecha</span><strong>Caminar derecha</strong>
-        <span>J</span><strong>Atacar</strong>
-        <span>F</span><strong>Magia de llama</strong>
-        <span>H / K / I</span><strong>Danado / Caer / Reposo</strong>
+      <div class="desktop-help" aria-label="Controles de teclado para PC">
+        <p class="summary">Controles para teclado en PC.</p>
+        <div class="key-chips">
+          <span>WASD / Flechas</span>
+          <span>J Atacar</span>
+          <span>F Llama</span>
+          <span>H Danado</span>
+          <span>K Caer</span>
+          <span>I Reposo</span>
+        </div>
       </div>
 
-      <div class="action-row">
-        <button class="action-btn" type="button" data-action="attack">Atacar</button>
-        <button class="action-btn fire" type="button" data-action="magic">Llama</button>
-        <button class="action-btn" type="button" data-action="damage">Danado</button>
-        <button class="action-btn" type="button" data-action="dead">Caer</button>
-      </div>
-
-      <div class="touch-pad" aria-label="Controles tactiles">
-        <button type="button" data-hold="ArrowUp">Arriba</button>
-        <button type="button" data-hold="ArrowLeft">Izquierda</button>
-        <button type="button" data-hold="ArrowDown">Abajo</button>
-        <button type="button" data-hold="ArrowRight">Derecha</button>
-      </div>
     </aside>
   </main>
+
+  <section class="mobile-controls" aria-label="Controles para movil">
+    <div class="joystick" aria-label="Joystick de movimiento">
+      <button class="joy up" type="button" data-hold="ArrowUp">Arriba</button>
+      <button class="joy left" type="button" data-hold="ArrowLeft">Izquierda</button>
+      <button class="joy center" type="button" aria-hidden="true" tabindex="-1"></button>
+      <button class="joy right" type="button" data-hold="ArrowRight">Derecha</button>
+      <button class="joy down" type="button" data-hold="ArrowDown">Abajo</button>
+    </div>
+    <div class="mobile-actions">
+      <button class="mobile-action fire" type="button" data-action="magic">Llama</button>
+      <button class="mobile-action" type="button" data-action="attack">Golpe</button>
+      <button class="mobile-action small" type="button" data-action="damage">Danado</button>
+      <button class="mobile-action small" type="button" data-action="dead">Caer</button>
+    </div>
+  </section>
 
   <script src="vendor/gsap.min.js"></script>
   <script src="js/natsu.js"></script>

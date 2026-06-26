@@ -4,8 +4,8 @@ const shadow = document.getElementById("shadow");
 const stateLabel = document.getElementById("stateLabel");
 const directionLabel = document.getElementById("directionLabel");
 const energyLabel = document.getElementById("energyLabel");
-const actionButtons = document.querySelectorAll(".action-btn");
-const touchButtons = document.querySelectorAll(".touch-pad button");
+const actionButtons = document.querySelectorAll("[data-action]");
+const touchButtons = document.querySelectorAll("[data-hold]");
 
 const spriteBase = "assets/natsu_sprites/";
 
@@ -225,6 +225,7 @@ actionButtons.forEach((button) => {
 });
 
 touchButtons.forEach((button) => {
+  if (button.classList.contains("center")) return;
   const key = keyMap[button.dataset.hold];
   button.addEventListener("pointerdown", () => {
     state.keys.add(key);
