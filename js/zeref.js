@@ -35,8 +35,8 @@ const frames = {
   walkUp: ["walk_up_01", "walk_up_02", "walk_up_03", "walk_up_04"],
   walkLeft: ["walk_left_01", "walk_left_02", "walk_left_03", "walk_left_04"],
   walkRight: ["walk_right_01", "walk_right_02", "walk_right_03", "walk_right_04"],
-  attack: ["attack_front_01", "attack_front_02", "attack_front_03"],
-  magic: ["magic_dark_01", "magic_dark_02", "magic_dark_03"],
+  attack: ["attack_front_01", "attack_front_02", "attack_front_03", "attack_front_04", "attack_front_05", "attack_front_06", "attack_front_07"],
+  magic: ["magic_dark_01", "magic_dark_02", "magic_dark_03", "magic_dark_04", "magic_dark_05", "magic_dark_06", "magic_dark_07"],
   damage: ["hurt_01"],
   dead: ["death_01", "death_02"]
 };
