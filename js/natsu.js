@@ -7,51 +7,18 @@ const energyLabel = document.getElementById("energyLabel");
 const actionButtons = document.querySelectorAll(".action-btn");
 const touchButtons = document.querySelectorAll(".touch-pad button");
 
+const spriteBase = "assets/natsu_sprites/";
+
 const frames = {
-  idleDown: [
-    { x: 43, y: 164, w: 104, h: 206 },
-    { x: 43, y: 1084, w: 92, h: 138 },
-    { x: 132, y: 1084, w: 92, h: 138 }
-  ],
-  walkDown: [
-    { x: 654, y: 158, w: 106, h: 202 },
-    { x: 795, y: 158, w: 106, h: 202 },
-    { x: 938, y: 158, w: 106, h: 202 },
-    { x: 1080, y: 158, w: 106, h: 202 }
-  ],
-  walkUp: [
-    { x: 48, y: 494, w: 100, h: 190 },
-    { x: 188, y: 494, w: 100, h: 190 },
-    { x: 330, y: 494, w: 100, h: 190 },
-    { x: 472, y: 494, w: 100, h: 190 }
-  ],
-  walkLeft: [
-    { x: 650, y: 478, w: 104, h: 176 },
-    { x: 794, y: 478, w: 104, h: 176 },
-    { x: 936, y: 478, w: 104, h: 176 },
-    { x: 1080, y: 478, w: 104, h: 176 }
-  ],
-  walkRight: [
-    { x: 48, y: 782, w: 104, h: 176 },
-    { x: 190, y: 782, w: 104, h: 176 },
-    { x: 330, y: 782, w: 104, h: 176 },
-    { x: 472, y: 782, w: 104, h: 176 }
-  ],
-  attack: [
-    { x: 252, y: 1086, w: 92, h: 136 },
-    { x: 352, y: 1086, w: 96, h: 136 },
-    { x: 450, y: 1086, w: 96, h: 136 }
-  ],
-  magic: [
-    { x: 552, y: 1072, w: 130, h: 150 },
-    { x: 696, y: 1060, w: 224, h: 165 }
-  ],
-  damage: [
-    { x: 916, y: 1084, w: 90, h: 138 }
-  ],
-  dead: [
-    { x: 1064, y: 1110, w: 164, h: 100 }
-  ]
+  idleDown: ["idle_front_01", "idle_front_02"],
+  walkDown: ["walk_down_01", "walk_down_02", "walk_down_03", "walk_down_04"],
+  walkUp: ["walk_up_01", "walk_up_02", "walk_up_03", "walk_up_04"],
+  walkLeft: ["walk_left_01", "walk_left_02", "walk_left_03", "walk_left_04"],
+  walkRight: ["walk_right_01", "walk_right_02", "walk_right_03", "walk_right_04"],
+  attack: ["attack_front_01", "attack_front_02", "attack_front_03"],
+  magic: ["magic_fire_01", "magic_fire_02", "magic_fire_03"],
+  damage: ["hurt_01"],
+  dead: ["death_01", "death_02"]
 };
 
 const state = {
@@ -88,6 +55,11 @@ const keyMap = {
   D: "right"
 };
 
+Object.values(frames).flat().forEach((name) => {
+  const img = new Image();
+  img.src = spriteBase + name + ".png";
+});
+
 function currentFrames() {
   if (state.mode === "attack") return frames.attack;
   if (state.mode === "magic") return frames.magic;
@@ -104,17 +76,15 @@ function currentFrames() {
 
 function drawFrame() {
   const set = currentFrames();
-  const frame = set[state.frame % set.length];
-  natsu.style.width = frame.w + "px";
-  natsu.style.height = frame.h + "px";
-  natsu.style.backgroundPosition = `-${frame.x}px -${frame.y}px`;
+  const frameName = set[state.frame % set.length];
+  natsu.style.backgroundImage = `url("${spriteBase}${frameName}.png")`;
   natsu.style.left = state.x + "%";
   natsu.style.top = state.y + "%";
   shadow.style.left = state.x + "%";
   shadow.style.top = state.y + "%";
   stateLabel.textContent = state.mode === "walk" ? "Caminando" : state.mode === "magic" ? "Llama" : state.mode === "attack" ? "Ataque" : state.mode === "damage" ? "Danado" : state.mode === "dead" ? "Caido" : "Reposo";
   directionLabel.textContent = labels[state.direction];
-  energyLabel.textContent = state.energy + "%";
+  energyLabel.textContent = Math.round(state.energy) + "%";
 }
 
 function setAction(mode, duration) {

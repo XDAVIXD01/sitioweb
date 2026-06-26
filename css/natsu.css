@@ -225,13 +225,13 @@ a {
   left: 50%;
   top: 58%;
   z-index: 5;
-  width: 106px;
-  height: 188px;
-  background-image: url("../assets/natsu-sprite-sheet.png");
+  width: 64px;
+  height: 64px;
   background-repeat: no-repeat;
-  background-size: 1254px 1254px;
+  background-position: center;
+  background-size: 64px 64px;
   image-rendering: pixelated;
-  transform: translate(-50%, -100%) scale(1.85);
+  transform: translate(-50%, -100%) scale(3);
   transform-origin: center bottom;
   filter: drop-shadow(0 0 12px rgba(255, 106, 31, 0.42));
 }
@@ -372,7 +372,7 @@ a {
   }
 
   .natsu-sprite {
-    transform: translate(-50%, -100%) scale(1.45);
+    transform: translate(-50%, -100%) scale(2.35);
   }
 
   .natsu-shadow {
