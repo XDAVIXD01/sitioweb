@@ -1,0 +1,381 @@
+:root {
+  --ink: #fff8f2;
+  --muted: #c9b9ae;
+  --panel: rgba(13, 11, 16, 0.82);
+  --line: rgba(255, 119, 56, 0.32);
+  --fire: #ff6a1f;
+  --gold: #ffd05a;
+  --pink: #ff6f9c;
+  --cyan: #46e8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  overflow-x: hidden;
+  background: #09070a;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.training-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 20% 12%, rgba(255, 106, 31, 0.24), transparent 30%),
+    radial-gradient(circle at 82% 20%, rgba(255, 111, 156, 0.16), transparent 32%),
+    linear-gradient(145deg, #070609 0%, #171018 48%, #120806 100%);
+}
+
+.training-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 106, 31, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 106, 31, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 88%);
+}
+
+.trainer-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(1280px, calc(100% - 28px));
+  min-height: 76px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--line);
+}
+
+.back-link {
+  color: #130805;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--gold), var(--fire));
+  box-shadow: 0 0 28px rgba(255, 106, 31, 0.32);
+  font-weight: 900;
+}
+
+.trainer-title {
+  display: grid;
+  justify-items: end;
+  text-transform: uppercase;
+}
+
+.trainer-title span {
+  color: var(--pink);
+  font-weight: 900;
+}
+
+.trainer-title strong {
+  font-size: clamp(1rem, 3vw, 1.6rem);
+}
+
+.trainer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 410px);
+  gap: 18px;
+  width: min(1280px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 22px 0 34px;
+}
+
+.stage-panel,
+.trainer-console {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 0 48px rgba(255, 106, 31, 0.14), inset 0 0 28px rgba(255, 106, 31, 0.05);
+  backdrop-filter: blur(16px);
+}
+
+.stage-panel {
+  overflow: hidden;
+}
+
+.stage-hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stage-hud div {
+  min-height: 68px;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stage-hud span,
+.eyebrow {
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stage-hud strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.2rem;
+}
+
+.training-stage {
+  position: relative;
+  min-height: min(68vh, 680px);
+  overflow: hidden;
+  outline: none;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 106, 31, 0.1), transparent 48%),
+    linear-gradient(180deg, rgba(10, 12, 17, 0.72), rgba(22, 9, 8, 0.88));
+}
+
+.training-stage:focus {
+  box-shadow: inset 0 0 0 2px rgba(255, 208, 90, 0.58);
+}
+
+.arena-lines {
+  position: absolute;
+  inset: 7% 5%;
+  border: 1px solid rgba(255, 106, 31, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 106, 31, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 106, 31, 0.11) 1px, transparent 1px);
+  background-size: 42px 42px;
+  transform: perspective(620px) rotateX(58deg);
+  transform-origin: center bottom;
+}
+
+.target {
+  position: absolute;
+  width: 84px;
+  aspect-ratio: 1;
+  border: 2px solid rgba(70, 232, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 24px rgba(70, 232, 255, 0.2), inset 0 0 18px rgba(70, 232, 255, 0.18);
+}
+
+.target::before,
+.target::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 120%;
+  height: 2px;
+  background: rgba(70, 232, 255, 0.45);
+  transform: translate(-50%, -50%);
+}
+
+.target::after {
+  width: 2px;
+  height: 120%;
+}
+
+.target-a {
+  left: 12%;
+  top: 34%;
+}
+
+.target-b {
+  right: 13%;
+  top: 54%;
+}
+
+.flame-orb {
+  position: absolute;
+  width: 120px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 208, 90, 0.7), rgba(255, 106, 31, 0.28), transparent 70%);
+  filter: blur(2px);
+  animation: breathe 2.4s infinite alternate;
+}
+
+.orb-a {
+  left: 8%;
+  bottom: 16%;
+}
+
+.orb-b {
+  right: 10%;
+  top: 18%;
+  animation-delay: 500ms;
+}
+
+.natsu-sprite {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  z-index: 5;
+  width: 106px;
+  height: 188px;
+  background-image: url("../assets/natsu-sprite-sheet.png");
+  background-repeat: no-repeat;
+  background-size: 1254px 1254px;
+  image-rendering: pixelated;
+  transform: translate(-50%, -100%) scale(1.85);
+  transform-origin: center bottom;
+  filter: drop-shadow(0 0 12px rgba(255, 106, 31, 0.42));
+}
+
+.natsu-shadow {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  z-index: 4;
+  width: 110px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  filter: blur(5px);
+  transform: translate(-50%, -50%) scale(1.8);
+}
+
+.trainer-console {
+  padding: 18px;
+}
+
+.trainer-console h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.summary {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.key-grid {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.key-grid span,
+.key-grid strong {
+  min-height: 38px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.key-grid span {
+  color: #180806;
+  background: linear-gradient(135deg, var(--gold), var(--fire));
+  font-weight: 900;
+  text-align: center;
+}
+
+.key-grid strong {
+  font-weight: 800;
+}
+
+.action-row,
+.touch-pad {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.action-btn,
+.touch-pad button {
+  min-height: 48px;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.action-btn:hover,
+.touch-pad button:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px rgba(255, 106, 31, 0.26);
+}
+
+.action-btn.fire {
+  color: #160704;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--gold), var(--fire));
+}
+
+.touch-pad {
+  margin-top: 16px;
+}
+
+@keyframes breathe {
+  from {
+    opacity: 0.45;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 0.95;
+    transform: scale(1.14);
+  }
+}
+
+@media (max-width: 980px) {
+  .trainer-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .trainer-topbar,
+  .stage-hud {
+    grid-template-columns: 1fr;
+  }
+
+  .trainer-topbar {
+    display: grid;
+    padding: 12px 0;
+  }
+
+  .trainer-title {
+    justify-items: start;
+  }
+
+  .stage-hud,
+  .key-grid,
+  .action-row,
+  .touch-pad {
+    grid-template-columns: 1fr;
+  }
+
+  .training-stage {
+    min-height: 540px;
+  }
+
+  .natsu-sprite {
+    transform: translate(-50%, -100%) scale(1.45);
+  }
+
+  .natsu-shadow {
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+}

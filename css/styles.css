@@ -126,6 +126,14 @@ a {
   box-shadow: 0 0 26px rgba(70, 232, 255, 0.24);
 }
 
+.nav .natsu-link,
+.natsu-cta {
+  color: #170705;
+  border-color: transparent;
+  background: linear-gradient(135deg, #ffd05a, #ff6a1f);
+  box-shadow: 0 0 30px rgba(255, 106, 31, 0.26);
+}
+
 main {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
@@ -582,7 +590,7 @@ h2 {
   .nav {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   h1 {
