@@ -342,6 +342,13 @@ a {
   width: 150px;
 }
 
+.audio-status {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
 .mobile-actions {
   display: grid;
   grid-template-columns: 1fr;

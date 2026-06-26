@@ -11,6 +11,7 @@ const trackName = document.getElementById("trackName");
 const playButtons = document.querySelectorAll("#playPause, #mobilePlayPause");
 const trackButtons = document.querySelectorAll("[data-track]");
 const volumeControl = document.getElementById("volumeControl");
+const audioStatus = document.getElementById("audioStatus");
 
 const spriteBase = "assets/natsu_sprites/";
 const tracks = {
@@ -171,6 +172,9 @@ function syncPlayLabels() {
   playButtons.forEach((button) => {
     button.textContent = label;
   });
+  if (audioStatus && !audio.paused) {
+    audioStatus.textContent = "Reproduciendo automaticamente.";
+  }
 }
 
 function setTrack(trackId) {
@@ -183,17 +187,48 @@ function setTrack(trackId) {
     button.classList.toggle("active", button.dataset.track === trackId);
   });
   if (wasPlaying) {
-    audio.play().catch(() => syncPlayLabels());
+    startMusic().catch(() => syncPlayLabels());
   }
+}
+
+function startMusic() {
+  audio.muted = false;
+  return audio.play().then(() => {
+    syncPlayLabels();
+    if (audioStatus) audioStatus.textContent = "Reproduciendo automaticamente.";
+  }).catch((error) => {
+    syncPlayLabels();
+    if (audioStatus) {
+      audioStatus.textContent = "El navegador bloqueo el inicio automatico. Toca Play o cualquier control.";
+    }
+    throw error;
+  });
 }
 
 function toggleMusic() {
   if (audio.paused) {
-    audio.play().then(syncPlayLabels).catch(syncPlayLabels);
+    startMusic().catch(syncPlayLabels);
   } else {
     audio.pause();
+    if (audioStatus) audioStatus.textContent = "Musica pausada.";
     syncPlayLabels();
   }
+}
+
+function tryAutoplay() {
+  audio.volume = volumeControl ? Number(volumeControl.value) : 0.65;
+  audio.load();
+  startMusic().catch(() => {
+    const unlock = () => {
+      startMusic().catch(syncPlayLabels);
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+      window.removeEventListener("touchstart", unlock);
+    };
+    window.addEventListener("pointerdown", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+    window.addEventListener("touchstart", unlock, { once: true });
+  });
 }
 
 function onKeyDown(event) {
@@ -274,7 +309,10 @@ playButtons.forEach((button) => {
 });
 
 trackButtons.forEach((button) => {
-  button.addEventListener("click", () => setTrack(button.dataset.track));
+  button.addEventListener("click", () => {
+    setTrack(button.dataset.track);
+    startMusic().catch(syncPlayLabels);
+  });
 });
 
 if (volumeControl) {
@@ -286,6 +324,9 @@ if (volumeControl) {
 
 audio.addEventListener("play", syncPlayLabels);
 audio.addEventListener("pause", syncPlayLabels);
+audio.addEventListener("error", () => {
+  if (audioStatus) audioStatus.textContent = "No se pudo cargar el archivo de audio.";
+});
 
 touchButtons.forEach((button) => {
   if (button.classList.contains("center")) return;
@@ -310,4 +351,5 @@ if (window.gsap) {
 
 drawFrame();
 stage.focus();
+tryAutoplay();
 requestAnimationFrame(loop);
