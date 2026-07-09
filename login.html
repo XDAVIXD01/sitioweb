@@ -162,6 +162,12 @@ p {
     display: none;
 }
 
+.brand-title-main,
+.brand-title-university,
+.brand-title-rest {
+    display: inline;
+}
+
 .brand-message {
     margin-top: 112px;
     max-width: 285px;
@@ -1925,6 +1931,53 @@ input[type="password"]::-webkit-caps-lock-indicator {
     overflow: visible !important;
 }
 
+@media (max-width: 1100px) {
+    .brand-lockup {
+        justify-content: flex-start !important;
+    }
+
+    .brand-lockup h1 {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .brand-title-main,
+    .brand-title-university,
+    .brand-title-rest {
+        display: block;
+    }
+
+    .brand-title-rest {
+        white-space: nowrap;
+    }
+
+    .brand-lockup::before,
+    .brand-lockup::after {
+        display: none !important;
+    }
+
+    .brand-panel::before,
+    .brand-panel::after {
+        display: none !important;
+    }
+
+    .brand-lockup h1 {
+        font-size: clamp(17px, 4.6vw, 28px) !important;
+        line-height: 1.05 !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .brand-lockup h1 {
+        font-size: clamp(15px, 4.25vw, 18px) !important;
+    }
+
+    .responsive-tagline {
+        font-size: clamp(8px, 2.5vw, 11px) !important;
+    }
+}
+
 @media (min-width: 1101px) {
     html,
     body {
@@ -1952,7 +2005,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
     <section class="brand-panel" aria-label="Universidad Tecnologica de Tabasco">
       <div class="brand-lockup">
         <img src="assets/login/imagenes/logout.jpg" alt="Universidad Tecnologica de Tabasco">
-        <h1>Universidad Tecnol&oacute;gica <br>de Tabasco<span class="responsive-tagline">Excelencia acad&eacute;mica, innovaci&oacute;n con sentido social</span></h1>
+        <h1><span class="brand-title-main"><span class="brand-title-university">Universidad</span> <span class="brand-title-rest">Tecnol&oacute;gica de Tabasco</span></span><span class="responsive-tagline">Excelencia acad&eacute;mica, innovaci&oacute;n con sentido social</span></h1>
       </div>
 
       <div class="brand-message">
