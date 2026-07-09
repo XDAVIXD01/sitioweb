@@ -11,6 +11,8 @@
   <meta http-equiv="Pragma" content="no-cache">
   <link rel="icon" href="assets/login/imagenes/favicon.ico">
   <title>SAIIUT | Sistema Automatizado Integral de Informacion de las Universidades Tecnologicas</title>
+  <link href="assets/login/css/source-sans-pro.css" rel="stylesheet">
+  <link href="assets/login/css/fontawesome-5-all.css" rel="stylesheet">
   <link href="assets/login/css/bootstrap.css" rel="stylesheet">
   <link href="assets/login/css/font-awesome.css" rel="stylesheet">
   <style>
@@ -1964,25 +1966,25 @@ input[type="password"]::-webkit-caps-lock-indicator {
       <div class="card login-card" id="detalle" name="detalle">
         <img class="login-iguana" src="assets/login/imagenes/iguana_sin_fondo.png" alt="Garrobo UTTAB">
         <div class="card-body">
-          <div class="login-icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+          <div class="login-icon"><i class="fas fa-lock"></i></div>
           <h3>Bienvenid@</h3>
           <p class="login-subtitle">Inicia sesi&oacute;n para continuar</p>
 
           <form>
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+                <span class="input-group-text"><i class="far fa-user"></i></span>
               </div>
               <input type="text" name="xUsuario" id="xUsuario" class="form-control" placeholder="Usuario" autocomplete="username">
               <input type="hidden" name="xUniversidad" id="xUniversidad" value="42">
             </div>
             <div class="input-group form-group">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
               </div>
               <input type="password" id="xContrasena" name="xContrasena" maxlength="10" class="form-control" placeholder="Contrase&ntilde;a" autocomplete="current-password" onkeyup="saltar(event, 'submit')">
               <div class="input-group-append">
-                <button type="button" class="input-group-text toggle-password" aria-label="Mostrar contrasena" aria-pressed="false"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                <button type="button" class="input-group-text toggle-password" aria-label="Mostrar contrasena" aria-pressed="false"><i class="far fa-eye"></i></button>
               </div>
             </div>
 
@@ -1992,7 +1994,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 
             <button type="button" id="xEntrar" name="xEntrar" onclick="signin();" class="btn login_btn">
               <span>Iniciar Sesi&oacute;n</span>
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              <i class="fas fa-arrow-right"></i>
             </button>
           </form>
         </div>
@@ -2019,11 +2021,11 @@ input[type="password"]::-webkit-caps-lock-indicator {
         msgbox.style.borderColor = "#08b39c";
         msgbox.style.color = "#058d95";
         msgbox.style.background = "linear-gradient(90deg, rgba(225,255,250,0.96), rgba(241,255,252,0.9))";
-        msgbox.innerHTML = '<span class="msgbox-icon" style="background:#08b39c"><i class="fa fa-check"></i></span><span>' + message + '</span>';
+        msgbox.innerHTML = '<span class="msgbox-icon" style="background:#08b39c"><i class="fas fa-check"></i></span><span>' + message + '</span>';
       } else {
         msgbox.removeAttribute("style");
         msgbox.className = "msgbox msgbox-error";
-        msgbox.innerHTML = '<span class="msgbox-icon"><i class="fa fa-exclamation"></i></span><span>' + message + '</span>';
+        msgbox.innerHTML = '<span class="msgbox-icon"><i class="fas fa-exclamation"></i></span><span>' + message + '</span>';
       }
 
       window.loginMsgboxTimer = setTimeout(function () {
@@ -2088,7 +2090,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
           passwordInput.setAttribute("type", visible ? "password" : "text");
           togglePassword.setAttribute("aria-pressed", visible ? "false" : "true");
           togglePassword.setAttribute("aria-label", visible ? "Mostrar contrasena" : "Ocultar contrasena");
-          togglePassword.innerHTML = visible ? '<i class="fa fa-eye" aria-hidden="true"></i>' : '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+          togglePassword.innerHTML = visible ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
           passwordInput.focus();
         });
       }
