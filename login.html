@@ -1937,9 +1937,13 @@ input[type="password"]::-webkit-caps-lock-indicator {
     }
 
     .brand-lockup h1 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         text-align: center !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        transform: translateX(clamp(10px, 3vw, 16px));
     }
 
     .brand-title-main,
@@ -1949,7 +1953,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
     }
 
     .brand-title-main {
-        transform: translateX(clamp(10px, 3vw, 16px));
+        transform: none;
     }
 
     .brand-title-rest {
@@ -1973,7 +1977,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 
 @media (max-width: 380px) {
-    .brand-title-main {
+    .brand-lockup h1 {
         transform: translateX(10px);
     }
 
