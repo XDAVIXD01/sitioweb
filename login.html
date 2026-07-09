@@ -1949,7 +1949,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
     }
 
     .brand-title-main {
-        transform: translateX(24px);
+        transform: translateX(clamp(10px, 3vw, 16px));
     }
 
     .brand-title-rest {
@@ -1974,7 +1974,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 
 @media (max-width: 380px) {
     .brand-title-main {
-        transform: translateX(18px);
+        transform: translateX(10px);
     }
 
     .brand-lockup h1 {
