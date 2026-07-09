@@ -139,6 +139,14 @@ a {
   box-shadow: 0 0 30px rgba(143, 53, 255, 0.28);
 }
 
+.nav .login-link,
+.login-cta {
+  color: #06131a;
+  border-color: transparent;
+  background: linear-gradient(135deg, #8ff7e8, #39b7ff);
+  box-shadow: 0 0 30px rgba(57, 183, 255, 0.24);
+}
+
 main {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
