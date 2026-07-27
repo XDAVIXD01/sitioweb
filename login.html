@@ -614,10 +614,43 @@ input[type="password"]::-webkit-caps-lock-indicator {
     padding: 52px 48px 42px !important;
 }
 
+.cool-alert-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(3,20,73,0.28);
+    backdrop-filter: blur(5px);
+    animation: coolAlertFadeIn 0.24s ease both;
+}
+
+.cool-alert-modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0;
+    border-radius: 6px;
+    color: var(--ink);
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 28px 70px rgba(3,20,73,0.28);
+    animation: coolAlertPop 0.32s cubic-bezier(.2,.9,.2,1.1) both;
+}
+
 .cool-alert-modal-icon {
     width: 88px !important;
     height: 88px !important;
     margin-bottom: 28px !important;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: #08b39c;
+    box-shadow: 0 12px 30px rgba(8,179,156,0.28);
 }
 
 .cool-alert-modal-icon svg {
@@ -626,12 +659,33 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 
 .cool-alert-modal-title {
+    margin: 0;
     font-size: 1.72rem !important;
     line-height: 1.18 !important;
+    font-weight: 900;
 }
 
 .cool-alert-modal-message {
+    margin-top: 10px;
+    color: var(--muted);
     font-size: 1.05rem !important;
+    font-weight: 800;
+}
+
+@keyframes coolAlertFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes coolAlertPop {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .forgot-link {
@@ -2415,6 +2469,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
   </div>
 <script src="assets/login/js/jquery-1.9.0.min.js"></script>
   <script src="assets/login/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/login/js/coolalert-local.js"></script>
   <script>
     function showMessage(message, isSuccess) {
       var msgbox = document.getElementById("msgbox");
@@ -2451,10 +2506,22 @@ input[type="password"]::-webkit-caps-lock-indicator {
         var welcomeTitle = "Bienvenid@ al SAIIUT";
         var welcomeMessage = "David";
         window.sessionStorage.setItem("saiiutDemoUser", "david");
-        showMessage(welcomeTitle + " " + welcomeMessage, true);
+        if (window.CoolAlert && typeof CoolAlert.show === "function") {
+          CoolAlert.show({
+            title: welcomeTitle,
+            message: welcomeMessage,
+            icon: "success",
+            showConfirmButton: false,
+            showCancelButton: false,
+            draggable: true,
+            allowOutsideClick: false
+          });
+        } else {
+          showMessage(welcomeTitle + " " + welcomeMessage, true);
+        }
         setTimeout(function () {
           window.location.href = "saiiut-dashboard.html";
-        }, 850);
+        }, 1100);
         return;
       }
 
