@@ -2442,8 +2442,10 @@ input[type="password"]::-webkit-caps-lock-indicator {
       var usuario = document.getElementById("xUsuario").value.trim().toLowerCase();
 
       if (usuario === "david") {
+        var welcomeTitle = "Bienvenid@ al SAIIUT";
+        var welcomeMessage = "David";
         window.sessionStorage.setItem("saiiutDemoUser", "david");
-        showMessage("Bienvenid@ al SAIIUT<br>David", true);
+        showMessage(welcomeTitle + "<br>" + welcomeMessage, true);
         setTimeout(function () {
           window.location.href = "saiiut-dashboard.html";
         }, 850);
