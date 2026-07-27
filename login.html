@@ -10,7 +10,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <link rel="icon" href="assets/login/imagenes/favicon.ico">
-  <title>SAIIUT | Sistema Automatizado Integral de Informacion de las Universidades Tecnologicas</title>
+  <title>SAIIUT &#124; Sistema Automatizado Integral de Informaci&oacute;n de las Universidades Tecnol&oacute;gicas</title>
   <link href="assets/login/css/source-sans-pro.css" rel="stylesheet">
   <link href="assets/login/css/fontawesome-5-all.css" rel="stylesheet">
   <link href="assets/login/css/bootstrap.css" rel="stylesheet">
@@ -52,13 +52,6 @@ body::after {
     display: none;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    .login-page:hover::before {
-        transform: scale(1.025);
-        filter: saturate(1.05);
-    }
-}
-
 a {
     text-decoration: none;
 }
@@ -85,7 +78,7 @@ p {
     width: 100%;
     z-index: -1;
     background: url('assets/login/imagenes/fondo_login1.png') top right / contain no-repeat;
-    transform: scale(1);
+    transform: scale(1.025);
     transform-origin: top right;
     transition: transform 1.1s ease, filter 1.1s ease;
     will-change: transform;
@@ -546,20 +539,20 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 
 .msgbox-error {
-    min-height: 56px;
+    min-height: 38px;
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 12px 18px;
-    border: 1px solid #f05252;
-    border-radius: 6px;
-    background: linear-gradient(90deg, rgba(255,235,235,0.96), rgba(255,242,242,0.9));
+    gap: 12px;
+    padding: 2px 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
     color: #d92323;
     font-size: 13px;
     line-height: 1.2;
     font-weight: 900;
-    box-shadow: 0 8px 20px rgba(217,35,35,0.1), inset 0 1px 0 rgba(255,255,255,0.7);
+    box-shadow: none;
     animation: msgboxFadeIn 0.45s ease both;
 }
 
@@ -2302,8 +2295,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
         overflow: hidden;
     }
 }
-
-  </style>
+</style>
   <script>
     window.history.forward();
 
@@ -2467,7 +2459,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
         })
         .then(function (json) {
           if (json.code == 200) {
-            var welcomeMessage = json.nombreUsuario ? "Bienvenido " + json.nombreUsuario : json.message;
+            var welcomeMessage = json.nombreUsuario ? "Bienvenid@ al SAIIUT<br>" + json.nombreUsuario : "Bienvenid@ al SAIIUT";
             showMessage(welcomeMessage, true);
             setTimeout(function () {
               window.location.href = json.topage;
@@ -2506,3 +2498,4 @@ input[type="password"]::-webkit-caps-lock-indicator {
   </script>
 </body>
 </html>
+
