@@ -556,6 +556,12 @@ input[type="password"]::-webkit-caps-lock-indicator {
     animation: msgboxFadeIn 0.45s ease both;
 }
 
+.msgbox-success span:last-child {
+    min-width: 0;
+    white-space: nowrap;
+    font-size: clamp(11px, 2.8vw, 13px);
+}
+
 .msgbox-error.is-hiding {
     animation: msgboxFadeOut 0.65s ease both;
 }
@@ -2417,7 +2423,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
       msgbox.innerHTML = "";
 
       if (isSuccess) {
-        msgbox.className = "msgbox msgbox-error";
+        msgbox.className = "msgbox msgbox-error msgbox-success";
         msgbox.style.borderColor = "#08b39c";
         msgbox.style.color = "#058d95";
         msgbox.style.background = "linear-gradient(90deg, rgba(225,255,250,0.96), rgba(241,255,252,0.9))";
