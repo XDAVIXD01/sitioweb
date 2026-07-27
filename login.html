@@ -2439,38 +2439,18 @@ input[type="password"]::-webkit-caps-lock-indicator {
     }
 
     function signin() {
-      var usuario = document.getElementById("xUsuario").value;
-      var contrasena = document.getElementById("xContrasena").value;
-      var universidad = document.getElementById("xUniversidad").value;
-      var data = new URLSearchParams();
-      data.append("xUsuario", usuario);
-      data.append("xContrasena", contrasena);
-      data.append("xUniversidad", universidad);
+      var usuario = document.getElementById("xUsuario").value.trim().toLowerCase();
 
-      fetch("validar_usuario.jsp", {
-        method: "post",
-        body: data
-      })
-        .then(function (response) {
-          if (!response.ok) {
-            throw new Error("backend-not-available");
-          }
-          return response.json();
-        })
-        .then(function (json) {
-          if (json.code == 200) {
-            var welcomeMessage = json.nombreUsuario ? "Bienvenid@ al SAIIUT<br>" + json.nombreUsuario : "Bienvenid@ al SAIIUT";
-            showMessage(welcomeMessage, true);
-            setTimeout(function () {
-              window.location.href = json.topage;
-            }, 1000);
-          } else {
-            showMessage(json.message || "Usuario o contrasena incorrectos.", false);
-          }
-        })
-        .catch(function () {
-          showMessage("Esta maqueta conserva la pantalla original, pero GitHub Pages no ejecuta validar_usuario.jsp.", false);
-        });
+      if (usuario === "david") {
+        window.sessionStorage.setItem("saiiutDemoUser", "david");
+        showMessage("Bienvenid@ al SAIIUT<br>David", true);
+        setTimeout(function () {
+          window.location.href = "saiiut-dashboard.html";
+        }, 850);
+        return;
+      }
+
+      showMessage("El usuario no existe.", false);
     }
 
     function saltar(event, target) {

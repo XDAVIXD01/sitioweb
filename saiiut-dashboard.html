@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAIIUT | David</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #273247;
+      --panel: #ffffff;
+      --soft: #f3f6fb;
+      --blue: #347df1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      color: var(--ink);
+      background: var(--soft);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .demo-shell {
+      width: min(100%, 1600px);
+      overflow: hidden;
+      border-radius: 6px;
+      background: var(--panel);
+      box-shadow: 0 18px 45px rgba(39, 50, 71, 0.16);
+    }
+
+    .demo-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #e6ebf4;
+      background: #fff;
+    }
+
+    .demo-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 800;
+    }
+
+    .demo-brand img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .demo-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-user {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .logout-button {
+      border: 0;
+      border-radius: 4px;
+      padding: 9px 13px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .dashboard-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      image-rendering: auto;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        display: block;
+        padding: 0;
+      }
+
+      .demo-shell {
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .demo-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      .dashboard-frame {
+        overflow-x: auto;
+      }
+
+      .dashboard-image {
+        width: 1280px;
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="demo-shell">
+    <header class="demo-topbar">
+      <div class="demo-brand">
+        <img src="assets/login/imagenes/logout.jpg" alt="UTTAB">
+        <span>SAIIUT</span>
+      </div>
+      <div class="demo-actions">
+        <span class="demo-user">David</span>
+        <button class="logout-button" type="button" id="logoutButton">Salir</button>
+      </div>
+    </header>
+    <div class="dashboard-frame">
+      <img class="dashboard-image" src="assets/login/imagenes/saiiut-dashboard.png" alt="Panel SAIIUT de David">
+    </div>
+  </main>
+
+  <script>
+    if (window.sessionStorage.getItem("saiiutDemoUser") !== "david") {
+      window.location.replace("login.html");
+    }
+
+    document.getElementById("logoutButton").addEventListener("click", function () {
+      window.sessionStorage.removeItem("saiiutDemoUser");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
