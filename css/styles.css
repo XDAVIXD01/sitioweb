@@ -313,11 +313,6 @@ h1 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .local-project-link,
-  .local-project-cta {
-    display: none;
-  }
-
   h1 {
     font-size: clamp(3rem, 18vw, 4.8rem);
   }
