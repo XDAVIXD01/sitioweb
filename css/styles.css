@@ -147,6 +147,14 @@ a {
   box-shadow: 0 0 30px rgba(57, 183, 255, 0.24);
 }
 
+.nav .local-project-link,
+.local-project-cta {
+  color: #07150f;
+  border-color: transparent;
+  background: linear-gradient(135deg, #b8ff88, #39d98a);
+  box-shadow: 0 0 30px rgba(57, 217, 138, 0.24);
+}
+
 main {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
@@ -303,6 +311,11 @@ h1 {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .local-project-link,
+  .local-project-cta {
+    display: none;
   }
 
   h1 {
