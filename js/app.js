@@ -70,47 +70,70 @@ menuToggle.addEventListener("click", () => {
 navigation
   .querySelectorAll("a")
   .forEach((link) => link.addEventListener("click", closeMenu));
-const panels = {
-  modes: {
-    title: "Elige tu entrenamiento",
-    content:
-      '<p>Entra al campo de práctica de tu personaje. Muévete libremente, combina ataques y prueba su magia a tu ritmo.</p><div class="dialog-links"><a class="btn natsu-cta" href="natsu.html">Natsu · Magia de fuego →</a><a class="btn zeref-cta" href="zeref.html">Zeref · Magia oscura →</a></div>',
-  },
-  guide: {
-    title: "Todo empieza con un movimiento",
-    content:
-      '<p>Elige a Natsu o Zeref para entrar al campo de entrenamiento.</p><div class="control-row"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> o las flechas · Moverte</div><div class="control-row"><kbd>J</kbd> · Ataque frontal</div><div class="control-row"><kbd>F</kbd> · Llama o magia oscura</div><p>En celular, usa el joystick y los botones táctiles del campo. Controla la música y el volumen desde el reproductor de cada personaje.</p>',
-  },
-  downloads: {
-    title: "Lleva la música contigo",
-    content:
-      '<p>El portal se juega directamente desde el navegador, sin instalar nada. También puedes descargar las pistas incluidas.</p><div class="dialog-links"><a class="btn natsu-cta" href="assets/audio/natsu-theme.mp3" download="natsu-theme.mp3">↓ Natsu Theme · MP3</a><a class="btn zeref-cta" href="assets/audio/gekitou-mahoujin.mp3" download="gekitou-mahoujin.mp3">↓ Gekitou Mahoujin · MP3</a></div>',
-  },
+
+const views = new Map(
+  [...document.querySelectorAll("[data-panel]")].map((panel) => [
+    panel.dataset.panel,
+    panel,
+  ]),
+);
+const viewNames = {
+  inicio: "Portal de entrenamiento",
+  personajes: "Personajes",
+  modos: "Modos",
+  guia: "Guía",
+  descargas: "Descargas",
 };
-const dialog = document.querySelector("#info-dialog");
-document.querySelectorAll("[data-dialog]").forEach((button) =>
-  button.addEventListener("click", () => {
-    const panel = panels[button.dataset.dialog];
-    document.querySelector("#dialog-title").textContent = panel.title;
-    document.querySelector("#dialog-content").innerHTML = panel.content;
-    closeMenu();
-    dialog.showModal();
+
+function showView(name, focus = false) {
+  if (!views.has(name)) name = "inicio";
+  views.forEach((panel, key) => {
+    panel.hidden = key !== name;
+  });
+  document.body.dataset.view = name;
+  document.title = `Hitori Bocchi | ${viewNames[name]}`;
+  navigation.querySelectorAll("[data-view]").forEach((link) => {
+    const active = link.dataset.view === name;
+    link.classList.toggle("active", active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+  closeMenu();
+  if (focus) {
+    views
+      .get(name)
+      .querySelector('[tabindex="-1"]')
+      .focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+}
+
+document.querySelectorAll("a[data-view]").forEach((link) =>
+  link.addEventListener("click", (event) => {
+    if (
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    )
+      return;
+    event.preventDefault();
+    const name = link.dataset.view;
+    if (location.hash !== `#${name}`) history.pushState(null, "", `#${name}`);
+    showView(name, true);
   }),
 );
-document
-  .querySelector(".dialog-close")
-  .addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", (event) => {
-  if (event.target !== dialog) return;
-  const rect = dialog.getBoundingClientRect();
-  if (
-    event.clientX < rect.left ||
-    event.clientX > rect.right ||
-    event.clientY < rect.top ||
-    event.clientY > rect.bottom
-  )
-    dialog.close();
+window.addEventListener("hashchange", () =>
+  showView(location.hash.slice(1), true),
+);
+document.querySelector(".skip-link").addEventListener("click", (event) => {
+  event.preventDefault();
+  closeMenu();
+  document.querySelector("#contenido").focus();
 });
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeMenu();
 });
+showView(location.hash.slice(1));
